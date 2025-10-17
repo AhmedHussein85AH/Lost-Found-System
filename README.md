@@ -1,6 +1,7 @@
 # 🎯 Lost & Found Management System
 
 A comprehensive web-based Lost & Found Management System built with Node.js, Express, MongoDB, and modern web technologies. This system provides a complete solution for managing lost and found items in any organization or community.
+<img width="944" height="409" alt="image" src="https://github.com/user-attachments/assets/ddd0653e-4567-4756-9474-593999c185e1" />
 
 ## ✨ Features
 
@@ -381,3 +382,4 @@ For support and questions:
 **Happy Use! 🚀**
 
 *Lost & Found System by Ahmed Hussein, Security Coordinator*
+
