@@ -1,0 +1,5 @@
+{"timestamp":"2025-09-11T10:17:32.023Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-11T10:25:21.998Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-11T10:25:27.486Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-11T10:25:53.380Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-11T10:48:12.666Z","level":"WARN","message":"MongoDB disconnected"}

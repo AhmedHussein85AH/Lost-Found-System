@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Admin Panel - Lost & Found System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .admin-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 1400px;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .table-responsive {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-group-sm .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        .badge {
+            font-size: 0.75rem;
+        }
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+        }
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginSection" class="login-container">
+        <div class="login-card">
+            <div class="text-center mb-4">
+                <h2><i class="fas fa-shield-alt text-primary"></i> Admin Login</h2>
+                <p class="text-muted">Enter your admin credentials</p>
+            </div>
+            <form id="adminLoginForm">
+                <div class="mb-3">
+                    <label for="adminUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="adminUsername" required>
+                </div>
+                <div class="mb-3">
+                    <label for="adminPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="adminPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="enhanced_lost_found_app.html" class="text-decoration-none">
+                    <i class="fas fa-arrow-left"></i> Back to Main App
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminSection" class="admin-container" style="display: none;">
+        <div class="admin-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2><i class="fas fa-tachometer-alt"></i> Simple Admin Panel</h2>
+                    <p class="mb-0">Welcome, <span id="adminUsernameDisplay"></span></p>
+                </div>
+                <div>
+                    <button class="btn btn-outline-light me-2" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                    <button class="btn btn-outline-light" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-4">
+            <!-- Statistics Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon text-primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 id="totalUsers">0</h4>
+                        <p class="text-muted mb-0">Total Users</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon text-success">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <h4 id="totalItems">0</h4>
+                        <p class="text-muted mb-0">Total Items</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon text-warning">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h4 id="pendingItems">0</h4>
+                        <p class="text-muted mb-0">Pending Items</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon text-info">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h4 id="resolvedItems">0</h4>
+                        <p class="text-muted mb-0">Resolved Items</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <ul class="nav nav-tabs mb-4" id="adminTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
+                        <i class="fas fa-users"></i> Users
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="items-tab" data-bs-toggle="tab" data-bs-target="#items" type="button" role="tab">
+                        <i class="fas fa-box"></i> Items
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="adminTabContent">
+                <!-- Users Tab -->
+                <div class="tab-pane fade show active" id="users" role="tabpanel">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4>User Management</h4>
+                        <button class="btn btn-success" onclick="showCreateUserModal()">
+                            <i class="fas fa-plus"></i> Create User
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable">
+                                <tr>
+                                    <td colspan="6" class="text-center">Loading users...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Items Tab -->
+                <div class="tab-pane fade" id="items" role="tabpanel">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4>Item Management</h4>
+                        <div>
+                            <select class="form-select d-inline-block w-auto me-2" id="statusFilter" onchange="loadItems()">
+                                <option value="">All Status</option>
+                                <option value="lost">Lost</option>
+                                <option value="found">Found</option>
+                                <option value="resolved">Resolved</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Serial #</th>
+                                    <th>Item Name</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsTable">
+                                <tr>
+                                    <td colspan="6" class="text-center">Loading items...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create User Modal -->
+    <div class="modal fade" id="createUserModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-user-plus"></i> Create New User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createUserForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="createFirstName" class="form-label">First Name *</label>
+                                <input type="text" class="form-control" id="createFirstName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="createLastName" class="form-label">Last Name *</label>
+                                <input type="text" class="form-control" id="createLastName" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="createUsername" class="form-label">Username *</label>
+                                <input type="text" class="form-control" id="createUsername" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="createEmail" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="createEmail" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="createPassword" class="form-label">Password *</label>
+                                <input type="password" class="form-control" id="createPassword" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="createPhone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="createPhone">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="createRole" class="form-label">Role *</label>
+                                <select class="form-select" id="createRole" required>
+                                    <option value="user">User</option>
+                                    <option value="moderator">Moderator</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="createDepartment" class="form-label">Department</label>
+                                <input type="text" class="form-control" id="createDepartment" placeholder="e.g., IT, HR, Finance">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="createUser()">
+                        <i class="fas fa-user-plus"></i> Create User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let authToken = localStorage.getItem('authToken');
+        let currentUser = null;
+
+        // Check if user is already logged in
+        if (authToken) {
+            checkAuth();
+        }
+
+        // Login form handler
+        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await login();
+        });
+
+        async function login() {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    if (data.user.role !== 'admin') {
+                        showAlert('Access denied. Admin privileges required.', 'error');
+                        return;
+                    }
+
+                    authToken = data.token;
+                    currentUser = data.user;
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('adminSection').style.display = 'block';
+                    document.getElementById('adminUsernameDisplay').textContent = currentUser.username;
+
+                    loadDashboard();
+                } else {
+                    showAlert('Login failed: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Login failed. Please try again.', 'error');
+            }
+        }
+
+        async function checkAuth() {
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/me', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.user.role === 'admin') {
+                    currentUser = data.user;
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('adminSection').style.display = 'block';
+                    document.getElementById('adminUsernameDisplay').textContent = currentUser.username;
+                    loadDashboard();
+                } else {
+                    logout();
+                }
+            } catch (error) {
+                console.error('Auth check error:', error);
+                logout();
+            }
+        }
+
+        function logout() {
+            authToken = null;
+            currentUser = null;
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('currentUser');
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('adminSection').style.display = 'none';
+            document.getElementById('adminLoginForm').reset();
+        }
+
+        async function loadDashboard() {
+            await Promise.all([
+                loadStats(),
+                loadUsers(),
+                loadItems()
+            ]);
+        }
+
+        async function loadStats() {
+            try {
+                const response = await fetch('http://localhost:5000/api/simple-admin/dashboard', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('totalUsers').textContent = data.stats.totalUsers || 0;
+                    document.getElementById('totalItems').textContent = data.stats.totalItems || 0;
+                    document.getElementById('pendingItems').textContent = data.stats.pendingItems || 0;
+                    document.getElementById('resolvedItems').textContent = data.stats.resolvedItems || 0;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        async function loadUsers() {
+            try {
+                const response = await fetch('http://localhost:5000/api/simple-admin/users', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+                const usersTable = document.getElementById('usersTable');
+
+                if (data.success && data.users) {
+                    usersTable.innerHTML = '';
+                    
+                    data.users.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.firstName} ${user.lastName}</td>
+                            <td>${user.email}</td>
+                            <td>
+                                <select class="form-select form-select-sm" onchange="updateUserRole('${user._id}', this.value)">
+                                    <option value="user" ${user.role === 'user' ? 'selected' : ''}>User</option>
+                                    <option value="moderator" ${user.role === 'moderator' ? 'selected' : ''}>Moderator</option>
+                                    <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Admin</option>
+                                </select>
+                            </td>
+                            <td>${user.department || 'N/A'}</td>
+                            <td>
+                                <span class="badge ${user.isActive !== false ? 'bg-success' : 'bg-danger'}">
+                                    ${user.isActive !== false ? 'Active' : 'Inactive'}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-warning" onclick="toggleUserStatus('${user._id}', ${user.isActive !== false})">
+                                        <i class="fas fa-${user.isActive !== false ? 'ban' : 'check'}"></i>
+                                        ${user.isActive !== false ? 'Deactivate' : 'Activate'}
+                                    </button>
+                                    <button class="btn btn-outline-danger" onclick="deleteUser('${user._id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        `;
+                        usersTable.appendChild(row);
+                    });
+                } else {
+                    usersTable.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading users</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading users:', error);
+                document.getElementById('usersTable').innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading users</td></tr>';
+            }
+        }
+
+        async function loadItems() {
+            try {
+                const statusFilter = document.getElementById('statusFilter').value;
+                let url = 'http://localhost:5000/api/simple-admin/items';
+                if (statusFilter) {
+                    url += `?status=${statusFilter}`;
+                }
+
+                const response = await fetch(url, {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+                const itemsTable = document.getElementById('itemsTable');
+
+                if (data.success && data.items) {
+                    itemsTable.innerHTML = '';
+                    
+                    data.items.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.serialNumber || item._id}</td>
+                            <td>${item.itemName}</td>
+                            <td>${item.category}</td>
+                            <td>
+                                <select class="form-select form-select-sm" onchange="updateItemStatus('${item._id}', this.value)">
+                                    <option value="lost" ${item.status === 'lost' ? 'selected' : ''}>Lost</option>
+                                    <option value="found" ${item.status === 'found' ? 'selected' : ''}>Found</option>
+                                    <option value="resolved" ${item.status === 'resolved' ? 'selected' : ''}>Resolved</option>
+                                </select>
+                            </td>
+                            <td>${new Date(item.createdAt).toLocaleDateString()}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-danger" onclick="deleteItem('${item._id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        `;
+                        itemsTable.appendChild(row);
+                    });
+                } else {
+                    itemsTable.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading items</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error loading items:', error);
+                document.getElementById('itemsTable').innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading items</td></tr>';
+            }
+        }
+
+        async function updateUserRole(userId, newRole) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/simple-admin/users/${userId}/role`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ role: newRole })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert('User role updated successfully!', 'success');
+                } else {
+                    showAlert('Error updating user role: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating user role:', error);
+                showAlert('Error updating user role', 'error');
+            }
+        }
+
+        async function toggleUserStatus(userId, currentStatus) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/simple-admin/users/${userId}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ isActive: !currentStatus })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert(`User ${!currentStatus ? 'activated' : 'deactivated'} successfully!`, 'success');
+                    loadUsers();
+                    loadStats();
+                } else {
+                    showAlert('Error updating user status: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating user status:', error);
+                showAlert('Error updating user status', 'error');
+            }
+        }
+
+        async function deleteUser(userId) {
+            if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) return;
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/simple-admin/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert('User deleted successfully!', 'success');
+                    loadUsers();
+                    loadStats();
+                } else {
+                    showAlert('Error deleting user: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+                showAlert('Error deleting user', 'error');
+            }
+        }
+
+        async function updateItemStatus(itemId, newStatus) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/simple-admin/items/${itemId}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert('Item status updated successfully!', 'success');
+                    loadStats();
+                } else {
+                    showAlert('Error updating item status: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating item status:', error);
+                showAlert('Error updating item status', 'error');
+            }
+        }
+
+        async function deleteItem(itemId) {
+            if (!confirm('Are you sure you want to delete this item? This action cannot be undone.')) return;
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/simple-admin/items/${itemId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert('Item deleted successfully!', 'success');
+                    loadItems();
+                    loadStats();
+                } else {
+                    showAlert('Error deleting item: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting item:', error);
+                showAlert('Error deleting item', 'error');
+            }
+        }
+
+        function showCreateUserModal() {
+            const modal = new bootstrap.Modal(document.getElementById('createUserModal'));
+            modal.show();
+        }
+
+        async function createUser() {
+            const firstName = document.getElementById('createFirstName').value;
+            const lastName = document.getElementById('createLastName').value;
+            const username = document.getElementById('createUsername').value;
+            const email = document.getElementById('createEmail').value;
+            const password = document.getElementById('createPassword').value;
+            const phone = document.getElementById('createPhone').value;
+            const role = document.getElementById('createRole').value;
+            const department = document.getElementById('createDepartment').value;
+
+            if (!firstName || !lastName || !username || !email || !password) {
+                showAlert('Please fill in all required fields', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/simple-admin/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        username,
+                        email,
+                        password,
+                        phone,
+                        role,
+                        department
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showAlert('User created successfully!', 'success');
+                    bootstrap.Modal.getInstance(document.getElementById('createUserModal')).hide();
+                    document.getElementById('createUserForm').reset();
+                    loadUsers();
+                    loadStats();
+                } else {
+                    showAlert('Error creating user: ' + data.message, 'error');
+                }
+            } catch (error) {
+                console.error('Error creating user:', error);
+                showAlert('Error creating user', 'error');
+            }
+        }
+
+        function refreshData() {
+            loadDashboard();
+            showAlert('Data refreshed!', 'success');
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type === 'error' ? 'danger' : type} alert-dismissible fade show position-fixed`;
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{"timestamp":"2025-09-08T23:45:45.040Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-08T23:45:59.479Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-08T23:48:00.049Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-08T23:48:00.188Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-08T23:50:46.912Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-08T23:55:20.366Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-08T23:57:35.292Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-08T23:57:35.437Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-08T23:58:14.644Z","level":"WARN","message":"MongoDB disconnected"}

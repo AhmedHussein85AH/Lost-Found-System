@@ -1,0 +1,71 @@
+{"timestamp":"2025-09-15T19:10:06.436Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T19:11:20.523Z","level":"WARN","message":"Security Event: Authentication failed: Invalid JWT token","data":{"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36","path":"/68b7d8892e0598106b58d068","error":"jwt expired"}}
+{"timestamp":"2025-09-15T19:13:19.821Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T19:13:43.925Z","level":"WARN","message":"Security Event: Authentication failed: Invalid JWT token","data":{"ip":"::1","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36","path":"/68b7d8892e0598106b58d068","error":"jwt expired"}}
+{"timestamp":"2025-09-15T19:13:46.848Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T19:14:06.360Z","level":"WARN","message":"MongoDB disconnected"}
+{"timestamp":"2025-09-15T19:14:24.711Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T19:15:43.272Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T19:21:51.710Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T19:21:51.819Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:07:16.007Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:10:50.883Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T20:11:34.289Z","level":"WARN","message":"MongoDB disconnected"}
+{"timestamp":"2025-09-15T20:11:45.768Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T20:11:45.903Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:11:52.846Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:16:10.264Z","level":"WARN","message":"MongoDB disconnected"}
+{"timestamp":"2025-09-15T20:16:33.970Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:17:10.231Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T20:33:33.441Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:34:02.076Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:34:14.696Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T20:34:23.449Z","level":"WARN","message":"Route not found: GET /.well-known/appspecific/com.chrome.devtools.json"}
+{"timestamp":"2025-09-15T20:34:23.559Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:34:57.321Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:36:50.388Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:41:26.587Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:41:48.322Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:42:00.578Z","level":"WARN","message":"MongoDB disconnected"}
+{"timestamp":"2025-09-15T20:42:16.349Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:44:13.769Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:44:18.226Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:44:18.373Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:44:34.033Z","level":"WARN","message":"MongoDB disconnected"}
+{"timestamp":"2025-09-15T20:44:47.139Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:46:36.181Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:46:37.903Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:46:42.048Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:46:44.061Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:46:45.163Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:46:45.325Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:42.902Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:43.822Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:44.059Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:44.387Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:45.478Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:45.665Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:45.872Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:46.268Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:47:46.457Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:48:02.459Z","level":"WARN","message":"MongoDB disconnected"}
+{"timestamp":"2025-09-15T20:49:22.421Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:51:44.603Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:29.618Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:30.793Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:30.963Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:31.131Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:31.603Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:31.757Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:58:31.915Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:02.883Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:03.900Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.107Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.248Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.398Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.549Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.693Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.847Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:04.997Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:05.567Z","level":"WARN","message":"Route not found: GET /ping"}
+{"timestamp":"2025-09-15T20:59:32.734Z","level":"WARN","message":"MongoDB disconnected"}
